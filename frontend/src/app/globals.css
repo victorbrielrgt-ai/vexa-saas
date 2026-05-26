@@ -1,0 +1,214 @@
+/* Google Fonts are loaded at runtime via the <head> link tags defined in next.config.js */
+/* Fallback stacks ensure text renders instantly before fonts load */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ──────────────────────────────────────────────────── */
+:root {
+  --font-syne: 'Syne', 'Inter', system-ui, sans-serif;
+  --font-dm-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* Brand */
+  --purple: #5B2EFF;
+  --purple-light: #7B52FF;
+  --purple-dim: #3D1ECC;
+  --green: #00D084;
+  --green-dim: #00A068;
+  --red: #FF4444;
+  --amber: #FFB800;
+
+  /* Surface */
+  --bg: #0B1020;
+  --surface: #111827;
+  --surface-2: #1A2235;
+  --surface-3: #212D44;
+  --border: #1E2D4A;
+  --border-light: #2A3A5A;
+
+  /* Text */
+  --text-primary: #F0F4FF;
+  --text-secondary: #8B9AB5;
+  --text-muted: #5A6680;
+}
+
+/* ── Base Reset ─────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-dm-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar Styling ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Component Utilities ────────────────────────────────────────────────────── */
+@layer components {
+  /* Cards */
+  .card {
+    @apply bg-base-surface border border-base-border rounded-2xl;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  .card-hover {
+    @apply card transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply border-brand-purple/30;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(91,46,255,0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Gradient Cards */
+  .card-purple {
+    background: linear-gradient(135deg, rgba(91,46,255,0.15) 0%, rgba(61,30,204,0.08) 100%);
+    @apply border border-brand-purple/25 rounded-2xl;
+  }
+  .card-green {
+    background: linear-gradient(135deg, rgba(0,208,132,0.12) 0%, rgba(0,160,104,0.06) 100%);
+    @apply border border-brand-green/20 rounded-2xl;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-brand-purple text-white font-display font-semibold px-6 py-3 rounded-xl
+           transition-all duration-200 flex items-center gap-2;
+    box-shadow: 0 4px 20px rgba(91,46,255,0.4);
+  }
+  .btn-primary:hover {
+    @apply bg-brand-purple-light;
+    box-shadow: 0 6px 30px rgba(91,46,255,0.55);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    @apply bg-base-surface-2 text-ink-primary font-display font-medium px-6 py-3 rounded-xl
+           border border-base-border transition-all duration-200 flex items-center gap-2;
+  }
+  .btn-secondary:hover {
+    @apply border-brand-purple/40 bg-base-surface-3;
+  }
+
+  .btn-ghost {
+    @apply text-ink-secondary font-medium px-4 py-2 rounded-lg
+           transition-all duration-200 flex items-center gap-2;
+  }
+  .btn-ghost:hover { @apply text-ink-primary bg-base-surface-2; }
+
+  /* Input */
+  .input {
+    @apply w-full bg-base-surface-2 border border-base-border rounded-xl px-4 py-3
+           text-ink-primary placeholder-ink-muted transition-all duration-200
+           focus:outline-none focus:border-brand-purple/60 focus:ring-2
+           focus:ring-brand-purple/10;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium;
+  }
+  .badge-purple { @apply badge bg-brand-purple-glow text-brand-purple-light border border-brand-purple/20; }
+  .badge-green  { @apply badge bg-brand-green-glow text-brand-green border border-brand-green/20; }
+  .badge-red    { @apply badge bg-brand-red-glow text-brand-red-light border border-brand-red/20; }
+  .badge-amber  { @apply badge bg-brand-amber-glow text-brand-amber border border-brand-amber/20; }
+
+  /* Metric value */
+  .metric-value {
+    @apply font-display text-3xl font-bold text-ink-primary tracking-tight;
+  }
+  .metric-label {
+    @apply text-sm font-medium text-ink-secondary;
+  }
+
+  /* Section header */
+  .section-title {
+    @apply font-display text-xl font-bold text-ink-primary;
+  }
+
+  /* Glow effects */
+  .glow-purple { filter: drop-shadow(0 0 12px rgba(91,46,255,0.5)); }
+  .glow-green  { filter: drop-shadow(0 0 12px rgba(0,208,132,0.5)); }
+
+  /* Animated gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #7B52FF 0%, #5B2EFF 40%, #00D084 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-base-surface-2 rounded-lg animate-pulse;
+    background: linear-gradient(90deg, var(--surface) 0%, var(--surface-3) 50%, var(--surface) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.animate-stagger-1 { animation-delay: 0.1s; }
+.animate-stagger-2 { animation-delay: 0.2s; }
+.animate-stagger-3 { animation-delay: 0.3s; }
+.animate-stagger-4 { animation-delay: 0.4s; }
+
+/* ── Background mesh ────────────────────────────────────────────────────────── */
+.bg-mesh {
+  background-image:
+    radial-gradient(ellipse 100% 60% at 20% 0%, rgba(91,46,255,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,208,132,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(11,16,32,1) 0%, rgba(11,16,32,1) 100%);
+}
+
+/* ── Chart tooltip ──────────────────────────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  color: var(--text-primary) !important;
+}
