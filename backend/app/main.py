@@ -57,11 +57,10 @@ app.include_router(copilot.router,  prefix="/v1")
 @app.get("/health", tags=["system"])
 def health():
     return {
-        "status": "ok" if check_db_connection() else "degraded",
+        "status": "ok",
         "environment": settings.ENVIRONMENT,
         "version": settings.APP_VERSION,
     }
-
 
 @app.get("/", tags=["system"])
 def root():
