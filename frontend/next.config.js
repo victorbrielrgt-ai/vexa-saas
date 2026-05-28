@@ -13,15 +13,14 @@ const nextConfig = {
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "https://vexa-saas-production.up.railway.app/v1/:path*",
-      },
-    ];
-  },
-
+async rewrites() {
+  return [
+    {
+      source: "/api/v1/:path*",
+      destination: "https://vexa-saas-production.up.railway.app/v1/:path*",
+    },
+  ];
+},
   async headers() {
     return [];
   },
