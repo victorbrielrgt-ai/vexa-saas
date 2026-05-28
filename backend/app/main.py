@@ -54,20 +54,9 @@ async def force_cors_headers(request: Request, call_next):
 
     response.headers["Access-Control-Allow-Credentials"] = "true"
     response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Authorization,Content-Type,X-Request-ID"
+    response.headers["Access-Control-Allow-Headers"] = "*"
 
     return response
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://project-jh4fr.vercel.app",
-        "https://project-jh4fr-lb7evoeph-vexa-ag001.vercel.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["X-Request-ID"],
-)
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 app.include_router(users.router,    prefix="/v1")
