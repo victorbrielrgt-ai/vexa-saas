@@ -38,10 +38,13 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins,
+    allow_origins=[
+        "https://project-jh4fr.vercel.app",
+        "https://project-jh4fr-lb7evoeph-vexa-ag001.vercel.app",
+    ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type", "X-Request-ID"],
+    allow_methods=["*"],
+    allow_headers=["*"],
     expose_headers=["X-Request-ID"],
 )
 
